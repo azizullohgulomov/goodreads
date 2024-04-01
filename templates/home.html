@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+    <h3>All Reviews</h3>
+
+    {% for review in book_reviews %}
+        <div class="container posts-content">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card mb-4">
+                      <div class="card-body">
+                        <div class="media mb-3">
+                          <img src="{{ review.user.profile_picture.url }}" class="d-block ui-w-40 rounded-circle" alt="">
+                          <div class="media-body ml-3">
+                            <b>{{ review.user.username }}</b> rated this book {{ review.stars_given }} stars
+                            <div class="text-muted small">{{ review.created_at | date:"M d, Y" }}</div>
+                          </div>
+                        </div>
+
+                        <p>
+                            {{ review.comment | truncatechars:300}}
+                        </p>
+                        <img class="cover-pic" src="{{ review.book.cover_picture.url }}">
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
